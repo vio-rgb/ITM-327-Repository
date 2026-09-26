@@ -1,0 +1,262 @@
+{
+  "cells": [
+    {
+      "cell_type": "raw",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Client Report - Exploring Names\"\n",
+        "subtitle: \"Unit 1 Task 1\"\n",
+        "author: Jordon Viola\n",
+        "format:\n",
+        "  html:\n",
+        "    self-contained: true\n",
+        "    page-layout: full\n",
+        "    title-block-banner: true\n",
+        "    toc: true\n",
+        "    toc-depth: 3\n",
+        "    toc-location: body\n",
+        "    number-sections: false\n",
+        "    html-math-method: katex\n",
+        "    code-fold: true\n",
+        "    code-summary: \"Show the code\"\n",
+        "    code-overflow: wrap\n",
+        "    code-copy: hover\n",
+        "    code-tools:\n",
+        "        source: false\n",
+        "        toggle: true\n",
+        "        caption: See code\n",
+        "execute: \n",
+        "  warning: false\n",
+        "    \n",
+        "---"
+      ],
+      "id": "b20491e3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import polars as pl\n",
+        "\n",
+        "url = \"https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv\"\n",
+        "\n",
+        "df = pl.read_csv(url, ignore_errors=True)\n",
+        "print(df.head())"
+      ],
+      "id": "4440cfdc",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import polars as pl\n",
+        "import numpy as np\n",
+        "from lets_plot import *\n",
+        "\n",
+        "LetsPlot.setup_html(isolated_frame=True)"
+      ],
+      "id": "21f70563",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Learn morea about Code Cells: https://quarto.org/docs/reference/cells/cells-jupyter.html\n",
+        "\n",
+        "# Include and execute your code here\n",
+        "df = pl.read_csv(\"names_year_csv.csv\")"
+      ],
+      "id": "b594541d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## QUESTION 1\n",
+        "\n",
+        "__What was the earliest year that the name ‘Felisha’ was used?__\n",
+        "\n",
+        "The latest year that the name \"Felisha\" was used in the year of 2007.\n",
+        "\n",
+        "_AI use reflection_\n",
+        "**Link** to the original chat:\n",
+        "**The Process** How exactly did you use the tool? I input the chapter reading into Clause and told it to generate practice questions for me to work along with.\n",
+        "**The Impact**  How did using AI impact your learning? It enhanced my learning as I feel I was having a hard time with the source material before. The practice questions were the most helpful as I was able to understand and apply the different parts of the course material. I had a conversation with Brother Lewis about this as the A.I. usage and he said this was appropriate, but I am listing it for historical purposes."
+      ],
+      "id": "fb819ef8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Q1\n",
+        "(\n",
+        "df\n",
+        "\n",
+        ".filter(pl.col(\"name\") == (\"Felisha\"))\n",
+        ".filter(pl.col(\"year\") == pl.col(\"year\").max())\n",
+        "\n",
+        ")"
+      ],
+      "id": "3801ac2c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## QUESTION 2\n",
+        "\n",
+        "__What year had the most babies named 'David'? How many babies were named 'David' that year?__\n",
+        "\n",
+        "The year with the most babies born in \n",
+        "\n",
+        "_AI use reflection_\n",
+        "**Link** to the original chat:\n",
+        "**The Process** How exactly did you use the tool? I input the chapter reading into Clause and told it to generate practice questions for me to work along with.\n",
+        "**The Impact**  How did using AI impact your learning? It enhanced my learning as I feel I was having a hard time with the source material before. The practice questions were the most helpful as I was able to understand and apply the different parts of the course material. I had a conversation with Brother Lewis about this as the A.I. usage and he said this was appropriate, but I am listing it for historical purposes."
+      ],
+      "id": "e103a1b2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Q2\n",
+        "(\n",
+        "df.filter(pl.col(\"name\") == \"David\")\n",
+        ".sort(\"Total\", descending=True)\n",
+        ".head(1)\n",
+        ".select(\"Total\", \"name\", \"year\")\n",
+        "\n",
+        ")"
+      ],
+      "id": "ed3b5f39",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## QUESTION 3\n",
+        "\n",
+        "__What year did your name hit its peak? How many babies were named your name in that year?__\n",
+        "\n",
+        "My name with its particular spelling hit its peak in 1991. There were 767 instances of the name.\n",
+        "\n",
+        "_AI use reflection_\n",
+        "**Link** to the original chat:\n",
+        "**The Process** How exactly did you use the tool? I input the chapter reading into Clause and told it to generate practice questions for me to work along with.\n",
+        "**The Impact**  How did using AI impact your learning? It enhanced my learning as I feel I was having a hard time with the source material before. The practice questions were the most helpful as I was able to understand and apply the different parts of the course material. I had a conversation with Brother Lewis about this as the A.I. usage and he said this was appropriate, but I am listing it for historical purposes."
+      ],
+      "id": "0ef89005"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Q3\n",
+        "(\n",
+        "df.filter(pl.col(\"name\") == \"Jordon\")\n",
+        ".sort(\"Total\", descending=True)\n",
+        ".head(1)\n",
+        ".select(\"Total\", \"name\", \"year\")\n",
+        "\n",
+        "\n",
+        "\n",
+        ")"
+      ],
+      "id": "96cd3a7f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## QUESTION 4\n",
+        "\n",
+        "__In the most recent year, what was the most common female name in Utah?__ \n",
+        "\n",
+        "Went through and got the ten most recent names. Olivia was the first most recent name that seemed like a purely female name.\n",
+        "\n",
+        "_AI use reflection_\n",
+        "**Link** to the original chat:\n",
+        "**The Process** How exactly did you use the tool? I input the chapter reading into Clause and told it to generate practice questions for me to work along with.\n",
+        "**The Impact**  How did using AI impact your learning? It enhanced my learning as I feel I was having a hard time with the source material before. The practice questions were the most helpful as I was able to understand and apply the different parts of the course material. I had a conversation with Brother Lewis about this as the A.I. usage and he said this was appropriate, but I am listing it for historical purposes.\n"
+      ],
+      "id": "b921e7ab"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.head"
+      ],
+      "id": "a84cd527",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Q4\n",
+        "\n",
+        "import polars as pl\n",
+        "\n",
+        "# Calculating the max value of a column in Polars\n",
+        "\n",
+        "(\n",
+        "df\n",
+        ".filter(pl.col(\"year\") == pl.col(\"year\").max())\n",
+        ".select(pl.col(\"UT\", \"Total\", \"name\", \"year\"))\n",
+        ".sort(\"UT\", descending = True).head(9)\n",
+        "\n",
+        "\n",
+        "\n",
+        ")\n"
+      ],
+      "id": "63450879",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df.columns"
+      ],
+      "id": "c91f9db9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---"
+      ],
+      "id": "f8a1d3a5"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\jordo\\AppData\\Roaming\\Python\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
